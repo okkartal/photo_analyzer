@@ -1,4 +1,6 @@
-﻿using Photos.AnalyzerService.Abstractions;
+﻿using Microsoft.Azure.CognitiveServices.Vision.ComputerVision;
+using Microsoft.Extensions.Configuration;
+using Photos.AnalyzerService.Abstractions;
 
 namespace Photos.AnalyzerService;
 

@@ -1,4 +1,6 @@
-﻿namespace Photos.Models;
+﻿using System.Text.Json.Serialization;
+
+namespace Photos.Models;
 
 public class PhotoUploadModel
 {
