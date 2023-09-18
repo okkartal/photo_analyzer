@@ -3,21 +3,27 @@
   "proxies": {
     "storageProxy": {
       "matchCondition": {
-        "methods": [ "POST" ],
+        "methods": [
+          "POST"
+        ],
         "route": "/api/v1/photos"
       },
       "backendUri": "https://<yourfunctionapp>.azurewebsites.net/api/PhotosStorage"
     },
     "downloadProxy": {
       "matchCondition": {
-        "methods": [ "GET" ],
+        "methods": [
+          "GET"
+        ],
         "route": "/api/v1/photos/{id}"
       },
       "backendUri": "https://<yourfunctionapp>.azurewebsites.net/api/Photos/{id}"
     },
     "searchProxy": {
       "matchCondition": {
-        "methods": [ "GET" ],
+        "methods": [
+          "GET"
+        ],
         "route": "/api/v1/search"
       },
       "backendUri": "https://<yourfunctionapp>.azurewebsites.net/api/PhotosSearch"

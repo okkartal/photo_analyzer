@@ -1,12 +1,11 @@
-﻿using Microsoft.Azure.CognitiveServices.Vision.ComputerVision;
-using Microsoft.Extensions.Configuration;
-using Photos.AnalyzerService.Abstractions;
+﻿using Photos.AnalyzerService.Abstractions;
 
 namespace Photos.AnalyzerService;
+
 public class ComputerVisionAnalyzerService : IAnalyzerService
 {
-
     private readonly ComputerVisionClient client;
+
     public ComputerVisionAnalyzerService(IConfiguration configuration)
     {
         var visionKey = configuration["VisionKey"];

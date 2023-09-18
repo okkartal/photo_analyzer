@@ -1,19 +1,13 @@
-using Microsoft.Azure.WebJobs;
-using Microsoft.Azure.WebJobs.Extensions.DurableTask;
-using Microsoft.Azure.WebJobs.Extensions.Http;
-using Microsoft.Extensions.Logging;
 using Photos.Models;
-using System.Linq;
-using System.Net.Http;
-using System.Text.Json;
-using System.Threading.Tasks;
 
 namespace Photos;
+
 public static class PhotosOrchestrator
 {
     [FunctionName("PhotosOrchestrator_HttpStart")]
     public static async Task<HttpResponseMessage> HttpStart(
-        [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post")] HttpRequestMessage req,
+        [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post")]
+        HttpRequestMessage req,
         [DurableClient] IDurableOrchestrationClient starter,
         ILogger log)
     {

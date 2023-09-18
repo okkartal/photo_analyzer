@@ -1,21 +1,17 @@
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Azure.WebJobs;
-using Microsoft.Azure.WebJobs.Extensions.Http;
-using Microsoft.Extensions.Logging;
-using System;
-using System.IO;
-using System.Threading.Tasks;
-
 namespace Photos;
+
 public static class PhotosDownload
 {
     [FunctionName("PhotosDownload")]
     public static async Task<IActionResult> Run(
-        [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post/{id}", Route = null)] HttpRequest req,
-        [Blob("photos-small/{id}.jpg", FileAccess.Read, Connection = Literals.StorageConnectionString)] Stream imageSmall,
-        [Blob("photos-medium/{id}.jpg", FileAccess.Read, Connection = Literals.StorageConnectionString)] Stream imageMedium,
-        [Blob("photos/{id}.jpg", FileAccess.Read, Connection = Literals.StorageConnectionString)] Stream imageOriginal,
+        [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post/{id}", Route = null)]
+        HttpRequest req,
+        [Blob("photos-small/{id}.jpg", FileAccess.Read, Connection = Literals.StorageConnectionString)]
+        Stream imageSmall,
+        [Blob("photos-medium/{id}.jpg", FileAccess.Read, Connection = Literals.StorageConnectionString)]
+        Stream imageMedium,
+        [Blob("photos/{id}.jpg", FileAccess.Read, Connection = Literals.StorageConnectionString)]
+        Stream imageOriginal,
         Guid id,
         ILogger log)
     {
@@ -47,7 +43,7 @@ public static class PhotosDownload
 
     private static async Task<byte[]> GetBytesFromStreamAsync(Stream stream)
     {
-        byte[] data = new byte[stream.Length];
+        var data = new byte[stream.Length];
         await stream.ReadAsync(data, 0, data.Length);
         return data;
     }

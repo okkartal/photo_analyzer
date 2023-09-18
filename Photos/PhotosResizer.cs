@@ -1,19 +1,13 @@
-using Microsoft.Azure.WebJobs;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Drawing;
-using System.Drawing.Drawing2D;
-using System.Drawing.Imaging;
-using System.IO;
-using System.Threading.Tasks;
-
 namespace Photos;
+
 public class PhotosResizer
 {
     [FunctionName("PhotosResizer")]
     public async Task Run([BlobTrigger("photos/{name}", Connection = "")] Stream myBlob,
-        [Blob("photos-small/{name}", FileAccess.Write, Connection = Literals.StorageConnectionString)] Stream imageSmall,
-        [Blob("photos-medium/{name}", FileAccess.Write, Connection = Literals.StorageConnectionString)] Stream imageMedium,
+        [Blob("photos-small/{name}", FileAccess.Write, Connection = Literals.StorageConnectionString)]
+        Stream imageSmall,
+        [Blob("photos-medium/{name}", FileAccess.Write, Connection = Literals.StorageConnectionString)]
+        Stream imageMedium,
         ILogger log)
     {
         log?.LogInformation("Resizing...");
@@ -44,7 +38,7 @@ public class PhotosResizer
         var desiredWidth = imageSize == ImageSize.Medium ? img.Width / 2 : img.Width / 4;
 
         var ratio = (decimal)desiredWidth / img.Width;
-        var resized = ResizeImage(img, desiredWidth, (int)Math.Floor((img.Height * ratio)));
+        var resized = ResizeImage(img, desiredWidth, (int)Math.Floor(img.Height * ratio));
         resized.Save(ms, ImageFormat.Jpeg);
         ms.Position = 0;
         return ms;
@@ -70,13 +64,13 @@ public class PhotosResizer
                 graphics.DrawImage(image, destRect, 0, 0, image.Width, image.Height, GraphicsUnit.Pixel, wrapMode);
             }
         }
-        return destImage;
 
+        return destImage;
     }
 
     private enum ImageSize
     {
-        Small, Medium
+        Small,
+        Medium
     }
 }
-
